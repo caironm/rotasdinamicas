@@ -17,31 +17,31 @@ class autoInclude {
 		if (is_dir($this->path.$this->rotes[0])) {
 			if(count($this->rotes) > 1) {
 				if (empty($this->rotes[1])) {
-					echo $this->rotes[0]."/index";
+					if (file_exists($this->path.$this->rotes[0].'/index.php')) {
+						echo $this->rotes[0].'/index.php';
+					}
 				}
 				elseif (file_exists($this->path.$this->rotes[0].'/'.$this->rotes[1].'.php')) {
-					echo $this->rotes[0].'/'.$this->rotes[1];
-				}
-				else {
-					echo "Rota não existe";
+					echo $this->rotes[0].'/'.$this->rotes[1].'.php';
 				}
 			}
 			else {
-				if(file_exists($this->path.$this->rotes[0]."/index.php")) {
-					echo $this->rotes[0]."/index";
-				}
-				else {
-					echo "Rota não existe";
+				if(file_exists($this->path.$this->rotes[0].'/index.php')) {
+					echo $this->rotes[0].'/index.php';
 				}
 			}
-		} 
-		else {
-			if (file_exists($this->path.$this->rotes[0].".php")) {
-				echo $this->rotes[0];
+		}
+		elseif (is_dir($this->path.$this->rotes[0].'/'.$this->rotes[1])){
+			if (file_exists($this->path.$this->rotes[0].'/'.$this->rotes[1].'/index.php')) {
+				echo $this->rotes[0].'/'.$this->rotes[1].'/index.php';
 			}
 			else {
-				echo "Rota não existe";
+				echo $this->rotes[0].'/'.$this->rotes[1].'/'.$this->rotes[2].'.php';
 			}
+		}
+		
+		elseif (file_exists($this->path.$this->rotes[0].'.php')) {
+				echo $this->rotes[0].'.php';
 		}	
 	}
 		
